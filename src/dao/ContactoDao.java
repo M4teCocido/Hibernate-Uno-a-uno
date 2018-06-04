@@ -25,6 +25,7 @@ public class ContactoDao {
 		try {
 			iniciaOperacion();
 			id = Integer.parseInt(session.save(objeto).toString());
+			tx.commit();
 		}catch(HibernateException he) {
 			manejaExcepcion(he);
 			throw he;
@@ -34,13 +35,42 @@ public class ContactoDao {
 		return id;
 	}
 	
-	
-	
-	public void modificarContacto() {
-		//implementar
+	public void actualizarContacto(Contacto objeto) {
+		try {
+			iniciaOperacion();
+			session.update(objeto);
+			tx.commit();
+		}catch(HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}finally {
+			session.close();
+		}
 	}
 	
-	public void eliminarContacto() {
-		//implementar
+	public void eliminarContacto(Contacto objeto) {
+		try {
+			iniciaOperacion();
+			session.delete(objeto);
+			tx.commit();
+		}catch(HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}finally {
+			session.close();	
+		}
 	}
+	
+	public Contacto traerContacto(long idContacto) {
+		Contacto objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Contacto) session.get(Contacto.class, idContacto);
+			tx.commit();
+		}finally{
+			session.close();
+		}
+		return objeto;
+	}
+	
 }

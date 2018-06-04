@@ -3,9 +3,9 @@
 <hibernate-mapping>
 	<class name="datos.Contacto" table="contacto">
 		<id name="idContacto" column="idContacto">
-			<generator class="foreing">
+			<generator class="foreign">
 				<param name="property">cliente</param>
-			</generator>
+	 		</generator>		
 		</id>
 		<property name="email" column="email" type="string" />
 		<property name="movil" column="movil" type="string" />

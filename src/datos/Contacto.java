@@ -26,13 +26,13 @@ public class Contacto {
 	}
 	
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getMovil() {
 		return this.movil;
 	}
@@ -59,7 +59,6 @@ public class Contacto {
 
 	@Override
 	public String toString() {
-		return "[Email = " + email + ", movil = " + movil + ", fijo = " + fijo
-				+ ", cliente = " + cliente + "]";
+		return "[Email = " + email + ", movil = " + movil + ", fijo = " + fijo + "]";
 	}
 }

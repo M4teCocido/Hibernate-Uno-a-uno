@@ -4,6 +4,7 @@ import funciones.Funciones;
 import datos.Contacto;
 
 public class Cliente {
+	
 	private long idCliente;
 	private String apellido;
 	private String nombre;

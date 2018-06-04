@@ -27,6 +27,7 @@ public class ClienteDao {
 		try {
 			iniciaOperacion();
 			id = Integer.parseInt(session.save(objeto).toString());
+			tx.commit();
 		}catch(HibernateException he){
 			manejaExcepcion(he);
 			throw he;
@@ -67,6 +68,7 @@ public class ClienteDao {
 		try {
 			iniciaOperacion();
 			objeto = (Cliente) session.get(Cliente.class, idCliente);
+			tx.commit();
 		}finally {
 			session.close();
 		}
@@ -74,10 +76,24 @@ public class ClienteDao {
 	}
 	
 	public Cliente traerCliente(int dni)throws HibernateException{
-		Cliente objeto;
+		Cliente objeto = null;
 		try {
 			iniciaOperacion();
 			objeto = (Cliente) session.createQuery("from Cliente c where c.dni =" + dni).uniqueResult();
+			tx.commit();
+		}finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	public Cliente traerClienteYContacto(long idCliente)throws HibernateException {
+		Cliente objeto = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Cliente c inner join fetch c.contacto where c.idCliente = " + idCliente;
+			objeto = (Cliente) session.createQuery(hql).uniqueResult();
+			tx.commit();
 		}finally {
 			session.close();
 		}
@@ -90,6 +106,7 @@ public class ClienteDao {
 		try {
 			iniciaOperacion();
 			lista = session.createQuery("from Cliente c order by c.apellido asc c.nombre asc").list();
+			tx.commit();
 		}
 			finally {
 			session.close();
