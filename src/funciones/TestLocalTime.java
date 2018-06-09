@@ -1,4 +1,4 @@
-package vista;
+package funciones;
 
 import java.time.LocalTime;
 
